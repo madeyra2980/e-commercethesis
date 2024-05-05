@@ -1,0 +1,95 @@
+.footer {
+    margin-top: 100px;
+    background-color: rgb(221, 245, 255);
+    color: #0f0d0d;
+    padding: 30px 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footerLeft {
+    flex: 1;
+  }
+
+  .footerLeft img{
+    width: 140px;
+    display: flex;
+  }
+  
+  .footerRight {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .footerLogo {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .footerDescription {
+    font-size: 14px;
+  }
+  
+  .footerTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .footerContact {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footerContact li {
+    margin-bottom: 5px;
+  }
+  
+  .footerBottom {
+    background-color: rgb(221, 245, 255);
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .footerCopyright {
+    font-size: 14px;
+  }
+
+  /* Добавление тени для контейнера футера */
+.footer {
+  background-color: rgb(221, 245, 255);
+}
+  
+  /* Добавление плавного перехода при наведении на логотипы */
+  .footerLeft img {
+    transition: transform 0.3s ease;
+  }
+  
+  .footerLeft img:hover {
+    transform: scale(1.1);
+  }
+  
+  .footerContact li a {
+    color: #ff6b6b; /* Пример цвета акцента */
+  }
+  
+  .footerBottom {
+    background-color: rgb(221, 245, 255);
+  }
+  
+  .footerBottom p {
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+@media screen and (max-width:1197px) {
+  .footer{
+    padding: 40px 40px;
+  }
+}

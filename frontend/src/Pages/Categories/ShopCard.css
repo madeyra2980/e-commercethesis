@@ -1,0 +1,107 @@
+.shop-card__wrapper {
+  display: grid;
+  grid-template-columns: 2fr;
+  gap: 20px;
+  padding: 20px;
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.filter__wrapper {
+  display: grid;
+  gap: 20px;
+  grid-auto-flow: row;
+}
+
+.search__filter input[type="text"] {
+  padding: 8px; 
+  font-size: 14px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter__wrapper input{
+  width: 100%;
+  padding: 8px; 
+  font-size: 14px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filter__wrapper p{
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.product__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.color__filter,
+.price__filter,
+.search__filter,
+.category__filter,
+.gender__filter {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+.category__filter{
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+
+
+.gender__filter{
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+.color__filter input[type="checkbox"],
+.category__filter input[type="checkbox"],
+.gender__filter input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.price__filter input[type="range"] {
+  width: 100%;
+}
+
+.price__filter input[type="range"]::-webkit-slider-thumb {
+  cursor: pointer;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #007bff;
+}
+
+.price__filter input[type="range"]::-moz-range-thumb {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #007bff;
+}
+
+.price__filter input[type="range"]::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 5px;
+  background: #d3d3d3;
+  border-radius: 3px;
+}
+
+.price__filter input[type="range"]::-moz-range-track {
+  height: 5px;
+  background: #d3d3d3;
+  border-radius: 3px;
+}

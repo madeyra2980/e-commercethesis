@@ -1,0 +1,31 @@
+.form-submit{
+    z-index: 111;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-submit input{
+    padding: 10px 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+    border: 1px solid gray;
+}
+
+.form-submit button{
+    padding: 10px 10px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    background-color:  #1f8df4;
+    color: white;
+}
+
+.thanks h2, p{
+    align-content: center;
+    text-align: center;
+}

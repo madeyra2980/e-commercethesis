@@ -1,0 +1,16 @@
+.not-product-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+
+  
+  .not-product-message {
+    width: 600px;
+    font-size: 28px;
+    color: black;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin: 140px auto;
+  }
+  

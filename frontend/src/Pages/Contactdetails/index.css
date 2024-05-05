@@ -1,0 +1,44 @@
+
+.Contactdetails__container{
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+}
+
+
+.brands__item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.brand__item__card{
+    background-color:  rgb(221, 245, 255);
+    width: 400px;
+    position: absolute;
+    top: 100px;
+    left: 30px;
+    padding: 20px;
+}
+
+
+.brand__item__card p, h1{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+
+}
+
+
+@media screen and (max-width:460px) {
+    .brand__item__card{
+        width: 200px;
+        font-size: 11px;
+    }
+}
