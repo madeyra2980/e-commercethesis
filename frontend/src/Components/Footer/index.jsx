@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import ItValley from '../Assets/itValley.jpg';
 
 const Footer = () => {
   return (
@@ -10,21 +9,19 @@ const Footer = () => {
           <h2 className="footerLogo">
             ПАРТНЕРЫ
           </h2>
-
-
         </div>
         <div className="footerRight">
           <h3 className="footerTitle">Контакты</h3>
           <ul className="footerContact">
-            <li>Email: oner_3d@gmail.com</li>
-            <li>Тел-номер: +7 74</li>
-            <li>Адресс: г. Семей Абая 107</li>
+            <li>Email: </li>
+            <li>Тел-номер: +7 777 77 77</li>
+            <li>Адресс:  г. Алматы 107</li>
           </ul>
         </div>
       </div>
       <div className="footerBottom">
         <p className="footerCopyright">
-          &copy; {new Date().getFullYear()} Company. All rights reserved.
+          &copy; {new Date().getFullYear()} 
         </p>
       </div>
     </footer>

@@ -4,7 +4,6 @@ import logo from '../Assets/logo.jpg'
 import { IoMdMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
-import { CiShoppingBasket } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 
 const NavbarBurger = () => {
@@ -19,21 +18,15 @@ const NavbarBurger = () => {
     <div>
       <div className="nav">
         <div className="nav-header">
-
           <div className="nav-title">
-            <h1>CENTER ONER</h1>
-            <img src={logo} alt="" width={30} />
+            <h1>NURMAD</h1>
           </div>
-
           <div className="nav-toggle">
             <IoMdMenu  onClick={()=>handleToggle()}/>
           </div>
-
-
           <div className={isOpen?"nav-links":"nav-links-show"}>
-
             <div className="nav-title">
-              <h1 style={{ fontSize: "11px" }}>CENTER ONER</h1>
+              <h1 style={{ fontSize: "11px" }}>NURMAD</h1>
             </div>
             <Link to="/">Домашняя страница</Link>
             <hr />
@@ -43,29 +36,20 @@ const NavbarBurger = () => {
             <hr />
             <Link to="/contact">Контактные данные</Link>
             <hr />
-            
             <Link to="/cart">
-
                 Корзина
-
             <div className='header__count'>
               <div className='heaeder__cart__count'>
                 <span>{getTotalCartItems()}</span>
               </div>
               </div>
-                          <hr />
-
+              <hr />
             </Link>
-
             <div className='background__opacity__close'>
-                <span ><IoMdClose onClick={()=>handleToggle()}/></span>
+                <span><IoMdClose onClick={()=>handleToggle()}/></span>
             </div>
           </div>
-
         </div>
-
-   
-
       </div>
     </div>
   )

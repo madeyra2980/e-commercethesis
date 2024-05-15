@@ -1,0 +1,27 @@
+.add-news{
+    padding: 20px 30px;
+    width: 400px;
+    margin: 140px auto;
+    cursor: pointer;
+}
+
+.add-news-itemfield{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 40px;
+    background-color: brown;
+    color: white;
+    font-weight: bold; 
+    margin-bottom: 40px;
+}
+
+img{
+    cursor: pointer;
+}

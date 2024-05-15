@@ -18,7 +18,6 @@ const Shop = () => {
 
   return (
     <div>
-   
       <NewsSlider />
       <Article />
       <Popular /> 

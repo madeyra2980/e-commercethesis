@@ -9,8 +9,6 @@ import ShopCard from './Pages/Categories/ShopCard';
 import Footer from './Components/Footer';
 import Contactdetails from './Pages/Contactdetails';
 import NavbarBurger from './Components/Navbar/NavbarBurger';
-import SignIn from './Components/Сabinet/SignIn';
-import SignUp from './Components/Сabinet/SignUp';
 
 function App() {
   return (
@@ -33,8 +31,6 @@ function App() {
           <Route path='/shop' element={<ShopCard/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/contact' element={<Contactdetails/>}/>
-          <Route path='/signIn' element={<SignIn/>}/>
-          <Route path='/signUp' element={<SignUp/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

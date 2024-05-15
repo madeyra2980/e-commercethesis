@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import './index.css';
+import './Application.css';
 import { AnotherContext } from '../../Context/AnotherProvider';
 
 const Application = ({ handleClickSendForm }) => {
@@ -18,55 +18,94 @@ const Application = ({ handleClickSendForm }) => {
   };
 
   return (
-    <div className="form-submit">
+    <div className="form-container">
       {!submitted ? (
-        <form onSubmit={handleSubmit}> 
-          <label>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="form-group">
+            <label>Имя:</label>
             <input
-              placeholder='Имя'
               type="text"
               name="name"
               value={data.name}
               onChange={handleChange}
+              className="form-input"
             />
-          </label>
-          <br />
-          <label>
+          </div>
+          <div className="form-group">
+            <label>Фамилия:</label>
             <input
-              placeholder='Фамилия'
               type="text"
               name="surname"
               value={data.surname}
               onChange={handleChange}
+              className="form-input"
             />
-          </label>
-          <br />
-          <label>
+          </div>
+          <div className="form-group">
+            <label>Номер телефона:</label>
             <input
-              placeholder='Номер телефона'
               type="tel"
               name="phoneNumber"
               value={data.phoneNumber}
               onChange={handleChange}
+              className="form-input"
             />
-          </label>
-          <br />
-          <label>
+          </div>
+          <div className="form-group">
+            <label>Адрес:</label>
             <input
-              placeholder='Адрес'
               type="text"
               name="address"
               value={data.address}
               onChange={handleChange}
+              className="form-input"
             />
-          </label>
-          <br />
-          <button type="submit">Отправить</button>
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={data.email}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>Номер карты:</label>
+            <input
+              type="text"
+              name="cartNumber"
+              value={data.cartNumber}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>Дата карты:</label>
+            <input
+              type="text"
+              name="dataCart"
+              value={data.dataCart}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label>CVV:</label>
+            <input
+              type="text"
+              name="cvv"
+              value={data.cvv}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+          <button type="submit" className="form-button">Отправить</button>
         </form>
       ) : (
-        <div className='thanks'>
+        <div className="thanks">
           <h2>Спасибо за отправку формы!</h2>
-          <button onClick={()=>setSubmitted(false)}>Закрыт</button>
         </div>  
       )}
     </div>
@@ -74,3 +113,4 @@ const Application = ({ handleClickSendForm }) => {
 };
 
 export default Application;
+  

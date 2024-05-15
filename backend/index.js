@@ -5,16 +5,12 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const userModel = require('./models/User')
-const { User, validate } = require('./models/User');
-const jwt = require('jsonwebtoken')
-
+const nodemailer = require('nodemailer')
 app.use(express.json());
 app.use(cors());
 
-  mongoose.connect(
-    "mongodb://localhost:27017/orders"
-)
+mongoose.connect("mongodb://localhost:27017/myapp",
+{ useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get("/", (req, res) => {
   res.send("Express app is running");
@@ -39,6 +35,130 @@ app.post("/upload", upload.single("product"), (req, res) => {
     image_url: `http://localhost:${port}/images/${req.file.filename}`,
   });
 });
+
+const Order = mongoose.model("Order", {
+  name: String,
+  email: String,
+  phoneNumber: String,
+  address: String,
+  surname: String,
+  cartNumber: String,
+  cvv: String,
+  dataCart: String,
+  orderItems: [
+    {
+      productName: { type: String, required: true }, 
+      quantity: { type: Number, required: true }, 
+      price: { type: Number, required: true },  // Added price field
+    }
+  ],
+  totalAmount: Number,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail.com', // Вы можете использовать другой почтовый сервис
+  host:'smtp.gmail.com',
+  port: 587, 
+  auth: {
+    user: 'madeyra2980@gmail.com', // Ваш email
+    pass: 'mzyqdraoqpfrpbqc' // Ваш пороль
+  }
+});
+
+// Route to handle incoming order data
+app.post("/orders", async (req, res) => {
+  try {
+// Извлекаем данные заказа из тела запроса
+    const {
+      name,
+      email,
+      phoneNumber,
+      address,
+      surname,
+      cartNumber,
+      cvv,
+      dataCart,
+      orderItems,
+      totalAmount
+    } = req.body;
+
+    // Создаем новый экземпляр заказа
+    const order = new Order({
+      name,
+      email,
+      phoneNumber,
+      address,
+      surname,
+      cartNumber,
+      cvv,
+      dataCart,
+      orderItems,
+      totalAmount
+    });
+
+// Сохраняем заказ в базе данных
+    await order.save();
+
+    let orderDetails = `Ваш заказ был успешно оформлен.\n\nДетали заказа:\n`;
+    orderItems.forEach((item, index) => {
+      orderDetails += `${index + 1}. ${item.productName} - Количество: ${item.quantity} - Цена за единицу: ${item.price}тг\n`;
+    });
+    orderDetails += `Итоговая сумма: ${totalAmount}тг`;
+
+    const mailOptions = {
+      from: 'salimov.nurkanat02@gmail.com',
+      to: email,
+      subject: 'Ваш заказ был успешно оформлен',
+      text: orderDetails
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.error("Ошибка при отправке почты:", error);
+      }
+      console.log('Email sent: ' + info.response);
+    });
+
+
+// Отвечаем сообщением об успешном сохранении
+    res.status(201).json({ success: true, message: "Заказ успешно сохранен" });
+  } catch (error) {
+    // Обрабатываем ошибки
+    console.error("Ошибка при сохранении заказа:", error);
+    res.status(500).json({ success: false, error: "Не удалось сохранить заказ" });
+  }
+});
+
+// Извлекаем все заказы из базы данных
+app.get("/orders", async (req, res) => {
+  try {
+    const orders = await Order.find({});
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Ошибка при получении заказов:", error);
+    res.status(500).json({ success: false, error: "Не удалось получить заказы" });
+  }
+});
+
+//Assuming you have a mongoose model named Order
+app.delete("/orders/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedOrder = await Order.findByIdAndDelete(id);
+    if (!deletedOrder) {
+      return res.status(404).json({ success: false, error: "Order not found" });
+    }
+    res.status(200).json({ success: true, message: "Order deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    res.status(500).json({ success: false, error: "Failed to delete order" });
+  }
+});
+
 
 const Product = mongoose.model("Product", {
   id: {
@@ -78,10 +198,10 @@ const Product = mongoose.model("Product", {
     type: Boolean,
     require: true,
   },
-  gender:{
+  gender: {
     type: String,
     require: true,
-  }
+  },
 });
 
 const News = mongoose.model("News", {
@@ -95,8 +215,7 @@ const News = mongoose.model("News", {
   },
 });
 
-
-app.post("/addproduct", async (req, res) => {
+app.post('/addproduct', async (req, res) => {
   let products = await Product.find({});
   let id;
   if (products.length > 0) {
@@ -133,13 +252,11 @@ app.post("/removeproduct", async (req, res) => {
   });
 });
 
-
 app.get("/allproducts", async (req, res) => {
   let products = await Product.find({});
   console.log("All products Fetched");
   res.send(products);
 });
-
 
 app.get("/newcollection", async (req, res) => {
   let products = await Product.find({});
@@ -149,7 +266,6 @@ app.get("/newcollection", async (req, res) => {
 
   res.send(newcollection);
 });
-
 
 app.put("/editproduct/:id", async (req, res) => {
   try {
@@ -165,12 +281,9 @@ app.put("/editproduct/:id", async (req, res) => {
     res.json({ success: true, product: updatedProduct });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ success: false, error: "Failed to update product" });
+    res.status(500).json({ success: false, error: "Failed to update product" });
   }
 });
-
 
 app.get("/products/:category", async (req, res) => {
   const { category } = req.params;
@@ -185,29 +298,22 @@ app.get("/products/:category", async (req, res) => {
   }
 });
 
-
 app.post("/addnews", upload.single("image"), async (req, res) => {
   try {
     const imageUrl = `http://localhost:${port}/images/${req.file.filename}`;
-
     const news = new News({
       image: imageUrl,
     });
-
     await news.save();
-
     res.json({
       success: true,
       news: news,
     });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ success: false, error: "Failed to add news" });
+    res.status(500).json({ success: false, error: "Failed to add news" });
   }
 });
-
 
 app.get("/news", async (req, res) => {
   try {
@@ -215,9 +321,7 @@ app.get("/news", async (req, res) => {
     res.json(newsImages);
   } catch (error) {
     console.error("Error loading news images:", error);
-    res
-      .status(500)
-      .send("An error occurred while loading news images");
+    res.status(500).send("An error occurred while loading news images");
   }
 });
 
@@ -232,54 +336,10 @@ app.post("/removenews", async (req, res) => {
     });
   } catch (error) {
     console.error("Error removing news:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Failed to remove news",
-      });
-  }
-});
-
-
-app.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      return res.status(400).json({ success: false, message: "Username or email already exists" });
-    }
-
-    const newUser = new User({ firstName, username, email, password });
-    await newUser.save();
-
-    res.status(201).json({ success: true, message: "User registered successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: "Failed to register user" });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({email });
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
-
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ success: false, message: "Invalid password" });
-    }
-
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", { expiresIn: "1h" });
-    res.json({ success: true, token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: "Failed to login" });
+    res.status(500).json({
+      success: false,
+      error: "Failed to remove news",
+    });
   }
 });
 
@@ -290,4 +350,3 @@ app.listen(port, (error) => {
     console.log(`ERROR ${error}`);
   }
 });
-

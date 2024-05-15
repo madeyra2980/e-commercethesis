@@ -1,3 +1,15 @@
-.admin{
-    display: flex   ;
+.list_items{
+    display: flex;
+    justify-content: space-around;
+}
+
+.list_items a{
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    font-family: "Freeman", sans-serif;
+}
+
+.list_items a{
+    color: rgb(223, 223, 223);
 }

@@ -24,11 +24,7 @@ const Navbar = () => {
         <hr />
         <li><Link to='/contact'>Контактные данные</Link></li>
       </ul>
-
-      <Link to='/signIn'>
-        <button className='SignIn'>Войти</button>
-      </Link>
-
+      
       <div className='header__cart'>
         <Link to='/cart'>
             <Button variant='text' startIcon={<CiShoppingBasket style={{ fontSize: "64px" }} />} style={{ color: 'black', fontSize:"26px"}}>

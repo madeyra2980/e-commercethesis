@@ -4,8 +4,8 @@ import Item from '../../Components/Item/Item';
 
 const ShopCard = () => {
 
-  const categories = ["Бәрі", "Футолкалар", "Жейделер", "Джинсілер", "Шортылар", "Қарындаш юбкалар", "Курткалар", "Плащи", "Кроссовки", "Сумки и клатчи", "Шарфы и платки", "Часы и украшения"];
-  const genders = ["Бәрі", "Ерлер", "Әйелдер "];
+  const categories = ["Все", "Футболки", "Толстовки", "Джинсы", "Шорты", "Юбски", "Куртки", "Плащи", "Кроссовки", "Сумки и клатчи", "Шарфы и платки", "Часы и украшения"];
+  const genders = ["Все", "Мужчин", "Женщин ", "Детей"];
 
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [selectedGender, setSelectedGender] = useState(0);

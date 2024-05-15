@@ -21,7 +21,7 @@ const Contactdetails = () => {
         <div className='Contactdetails__container'>
             <div className='brand__item__card'>
                 <h1>СВЯЖИТЕСЬ С НАМИ</h1>
-                <p>+7 707 048 102</p>
+                <p>+7 777 77 77</p>
                 <p>ул. Абая 107</p>
 
                 <div className='brands__item'>
